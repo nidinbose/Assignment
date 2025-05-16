@@ -2,8 +2,8 @@ import Booking from '../modeles/appoinment.model.js'
 
 export async function addAppoinment(req, res) {
   try {
-    const { name, date, time, status, doctorId } = req.body
-    if (!name || !date || !time || !status || !doctorId) {
+    const { name, date, time, status, doctorId,doctorName } = req.body
+    if (!name || !date || !time || !status || !doctorId || !doctorName)  {
       return res.status(400).json({ success: false, message: "All fields are required" })
     }
     const existing = await Booking.findOne({ doctorId, date, time })
@@ -19,6 +19,7 @@ export async function addAppoinment(req, res) {
       time,
       status,
       doctorId,
+      doctorName
     })
     await newBooking.save()
     return res.status(200).json({
@@ -49,5 +50,15 @@ export async function getAppointments(req, res) {
   } catch (error) {
     console.error("Error fetching appointments:", error);
     return res.status(500).send("Error fetching appointments");
+  }
+}
+
+export async function getBookings(req, res) {
+  try {
+    const data = await Booking.find({});
+    return res.status(200).json(data);
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    return res.status(500).json({ message: "Failed to fetch bookings", error });
   }
 }

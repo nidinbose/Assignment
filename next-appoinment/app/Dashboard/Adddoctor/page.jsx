@@ -15,11 +15,10 @@ export default function Adddoctor() {
   })
 
   const [imagePreview, setImagePreview] = useState(null)
-  const handleChange = (e) => {
-    setFormData((pre) => ({ ...pre, [e.target.name]: e.target.value }))
-  }
-   
 
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0]
@@ -65,110 +64,70 @@ export default function Adddoctor() {
   }
 
   return (
-   <div className="min-h-screen flex flex-col bg-gray-100 font-sans">
-  <header className="bg-teal-400 text-white py-5 px-6 shadow-md">
-    <h1 className="text-2xl md:text-xl font-bold tracking-wide">
-     Add Doctor
-    </h1>
-  </header>
-  <main className="flex-1 flex items-center justify-center p-6">
-    <div className="w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
-      <div className="md:w-1/2 bg-blue-50 flex items-center justify-center p-8">
-        {imagePreview ? (
-          <img
-            src={imagePreview}
-            alt="Doctor Preview"
-            className="rounded-lg w-64 h-64 object-cover border-4 border-blue-300 shadow-md"
-          />
-        ) : (
-          <div className="text-center text-gray-400">
-            <div className="w-64 h-64 bg-gray-200 border-dashed border-4 border-gray-300 rounded-lg flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-teal-100 to-blue-100 py-10 px-4 font-sans">
+      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+        <div className="bg-blue-50 flex flex-col items-center justify-center p-8">
+          {imagePreview ? (
+            <img
+              src={imagePreview}
+              alt="Doctor Preview"
+              className="w-64 h-64 object-cover rounded-xl border-4 border-blue-300 shadow-lg transition-transform duration-300 hover:scale-105"
+            />
+          ) : (
+            <div className="w-64 h-64 bg-gray-200 border-4 border-dashed border-gray-300 rounded-xl flex items-center justify-center text-gray-500">
               <span className="text-lg font-medium">Image Preview</span>
             </div>
-            <p className="mt-2 text-sm text-gray-500">No image selected</p>
-          </div>
-        )}
-      </div>
-      <div className="md:w-1/2 p-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Add New Doctor
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <input
-              type="text"
-              name="name"
-              placeholder="Doctor's Name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              name="stream"
-              placeholder="Specialization"
-              value={formData.stream}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              name="location"
-              placeholder="Location"
-              value={formData.location}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              name="contact"
-              placeholder="Contact Number"
-              value={formData.contact}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-teal-400 text-white font-semibold py-2 px-4 rounded-md transition duration-200"
-          >
-            Submit
-          </button>
-        </form>
+          )}
+          <p className="text-sm text-gray-500 mt-4">{imagePreview ? 'Selected Image' : 'No image selected'}</p>
+        </div>
+        <div className="p-8">
+          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Add Doctor</h2>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <InputField name="name" value={formData.name} onChange={handleChange} placeholder="Doctor's Name" />
+            <InputField name="stream" value={formData.stream} onChange={handleChange} placeholder="Specialization" />
+            <InputField name="location" value={formData.location} onChange={handleChange} placeholder="Location" />
+            <InputField name="contact" value={formData.contact} onChange={handleChange} placeholder="Contact Number" />
+            <InputField type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" />
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Doctor Image</label>
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 cursor-pointer"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-md font-semibold text-lg transition duration-200"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </main>
-</div>
+  )
+}
 
+function InputField({ name, value, onChange, placeholder, type = 'text' }) {
+  return (
+    <div>
+      <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1 capitalize">
+        {placeholder}
+      </label>
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
+        required
+      />
+    </div>
   )
 }

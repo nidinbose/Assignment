@@ -6,6 +6,7 @@
     time:{type:String},
     status:{type:String},
      doctorId:{type:String},
+      doctorName:{type:String},
 
  })
  export default mongoose.model.booking || mongoose.model("bookings",bookingSchema)

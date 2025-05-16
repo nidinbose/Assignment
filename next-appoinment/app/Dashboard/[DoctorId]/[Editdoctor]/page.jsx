@@ -4,10 +4,11 @@ import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Api from '@/app/Api' 
+import { useRouter } from 'next/navigation'
 
 export default function EditDoctorPage() {
   const { DoctorId: id } = useParams() 
-
+ const router = useRouter()
   const [formData, setFormData] = useState({
     name: '',
     stream: '',
@@ -27,6 +28,7 @@ export default function EditDoctorPage() {
         const res = await axios.get(`${domain}getdoctorId/${id}`)
         setFormData(res.data)
         setImagePreview(res.data.image)
+      
       } catch (err) {
         console.error('Error fetching doctor:', err)
       }
@@ -62,6 +64,7 @@ export default function EditDoctorPage() {
     try {
       await axios.put(`${domain}updatedoctor/${id}`, formData)
       alert('Doctor updated successfully!')
+         router.push(`/Dashboard/${id}`)
     } catch (err) {
       console.error('Update failed:', err)
     }
@@ -69,10 +72,10 @@ export default function EditDoctorPage() {
 
   return (
 <div className="min-h-screen w-full flex flex-col bg-gray-50 overflow-y-auto">
-  <header className="bg-teal-400 shadow-sm">
+  <header className="bg-[#031b4e] shadow-sm">
     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-gray-200">Edit Doctor</h1>
+        {/* <h1 className="text-3xl font-bold text-gray-200">Edit Doctor</h1> */}
         <button
           onClick={() => router.back()}
           className="flex items-center text-gray-600 hover:text-gray-900"
@@ -193,7 +196,7 @@ export default function EditDoctorPage() {
               </button>
               <button
                 type="submit"
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-400 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#031b4e]  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
