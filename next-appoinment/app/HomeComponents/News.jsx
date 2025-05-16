@@ -97,7 +97,6 @@ export default function RecentBlogs() {
                 <img
                   src={blog.image}
                   alt={blog.title}
-                  fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>

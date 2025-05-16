@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image';
+
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FaHeartbeat, FaStethoscope, FaUserMd, FaArrowRight } from 'react-icons/fa';
+import { FaHeartbeat,  FaUserMd, FaArrowRight } from 'react-icons/fa';
 import { MdEmail, MdHealthAndSafety } from 'react-icons/md';
 
 export default function Landing() {
@@ -96,7 +96,7 @@ export default function Landing() {
               width={600}
               height={700}
               className="rounded-xl z-10 object-cover w-full h-auto "
-              priority
+            
             />
             <motion.div 
               whileHover={{ scale: 1.05 }}
