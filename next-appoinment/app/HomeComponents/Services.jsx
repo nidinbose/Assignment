@@ -80,7 +80,7 @@ export default function WellnessServices() {
                 {service.description}
               </h4>
            
-              <hr />
+              <hr className="border border-dashed"/>
               <div className="text-sm font-medium text-blue-600 flex items-center gap-2">
                 <span className="w-2 h-2 bg-cyan-400 rounded-full inline-block"></span>
                 {service.doctors}
