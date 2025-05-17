@@ -1,0 +1,15 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/About/page": "/About",
+  "/Contact/page": "/Contact",
+  "/Dashboard/[DoctorId]/[Editdoctor]/page": "/Dashboard/[DoctorId]/[Editdoctor]",
+  "/Dashboard/Appoinments/page": "/Dashboard/Appoinments",
+  "/Service/page": "/Service",
+  "/Dashboard/[DoctorId]/page": "/Dashboard/[DoctorId]",
+  "/Dashboard/Adddoctor/page": "/Dashboard/Adddoctor",
+  "/Doctors/[bookingid]/page": "/Doctors/[bookingid]",
+  "/Dashboard/page": "/Dashboard",
+  "/Doctors/page": "/Doctors",
+  "/page": "/"
+}
